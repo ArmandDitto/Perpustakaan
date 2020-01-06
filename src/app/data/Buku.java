@@ -6,13 +6,15 @@ public class Buku{
    private String penulis;
    private String penerbit;
    private int JmlHalaman;
+   private int stok;
 
-   public Buku(String judulBuku, String ISBN, String penulis, String penerbit, int JmlHalaman){
+   public Buku(String judulBuku, String ISBN, String penulis, String penerbit, int JmlHalaman, int stok){
       this.judulBuku = judulBuku;
       this.ISBN = ISBN;
       this.penulis = penulis;
       this.penerbit = penerbit;
       this.JmlHalaman = JmlHalaman;
+      this.stok = stok;
    }
 
    public String getJudulBuku() {
@@ -52,6 +54,18 @@ public class Buku{
    }
 
    public void setJmlHalaman(int jmlHalaman) {
-      JmlHalaman = jmlHalaman;
+      this.JmlHalaman = jmlHalaman;
+   }
+
+   public int getStok() {
+      return stok;
+   }
+
+   public void setStok(int stok) {
+      this.stok = stok;
+   }
+
+   public void dipinjam(){
+      this.stok--;
    }
 }

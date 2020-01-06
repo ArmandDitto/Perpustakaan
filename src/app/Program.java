@@ -1,16 +1,18 @@
 package app;
 import app.data.Buku;
 import app.data.Member;
+import app.transaction.Peminjaman;
 import java.util.HashMap;
+import java.util.Scanner;
 
 public class Program{
     public static void main(String[]args){
 
         //DB Buku
         HashMap<String, Buku> lemariBuku = new HashMap<String,Buku>();
-        lemariBuku.put("978-3-16-23131", new Buku ("Lupin III","978-3-16-23131","Shingen Tokugawa","Gramedia",1004));
-        lemariBuku.put("976-3-15-23144", new Buku ("Petualangan Tintin","976-3-15-23144","James Wadsworth","Elex Media Komputindo",89));
-        lemariBuku.put("763-9-89-32785", new Buku ("Art of War","763-9-89-32785","Zhuge Liang","Erlangga",372));
+        lemariBuku.put("111-1-11-11111", new Buku ("Lupin III","978-3-16-23131","Shingen Tokugawa","Gramedia",1004,30));
+        lemariBuku.put("976-3-15-23144", new Buku ("Petualangan Tintin","976-3-15-23144","James Wadsworth","Elex Media Komputindo",89,40));
+        lemariBuku.put("763-9-89-32785", new Buku ("Art of War","763-9-89-32785","Zhuge Liang","Erlangga",372,16));
         //End of DB Buku
 
         int no=1;
@@ -48,9 +50,23 @@ public class Program{
             System.out.println("Alamat    : "+alamatMember);
             System.out.println("Telepon   : "+telpMember);
             System.out.println();
+        }
 
+        Scanner input = new Scanner(System.in);
+        System.out.println("Input ISBN Buku yang akan dipinjam: ");
+        String isbn = input.nextLine();
+
+        Member member = daftarMember.get("MQ-0001");
+        Peminjaman transaction = new Peminjaman(member);
+        transaction.setKodeTransaksi();
+        System.out.println(transaction.getKodeTransaksi());
+        
+        if(lemariBuku.containsKey(isbn)){
+            System.out.println("Buku Ada");
+            Buku borrowBooks = lemariBuku.get(isbn);
+            borrowBooks.dipinjam();
+        }else{
+            System.out.println("Buku tidak ada");  
         }
     }
-
-
 }     
